@@ -1,0 +1,92 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        {{Title}}
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group pull-left">
+                    <label> Search <input type="text" ng-model="search" class="form-control" placeholder="Search"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group pull-right">
+                    Show: <select class="form-control" ng-model="itemsPerPage" style="font-weight:normal">
+                        <option ng-value="1">1</option>
+                        <option ng-value="2">2</option>
+                        <option ng-value="5">5</option>
+                        <option ng-value="10">10</option>
+                        <option ng-value="20">20</option>
+                    </select>Entries
+                </div>
+            </div>
+        </div>
+
+        <a href="#/PD/Create" title="Create new record">Create new</a>
+        <table class="table table-striped table-responsive">
+            <thead>
+                <tr>
+                    <th ng-click="sort(FirstName)">
+                        First Name
+                        <!--<span class="glyphicon glyphicon-sort" ng-show="sortKey=='FirstName'" ng-class="{'glyphicon-cheveron-up':reverse,'glyphicon-cheveron-down':!reverse}"></span>-->
+                    </th>
+
+                    <th ng-click="sort(LastName)">
+                        Last Name
+                        <!--<span class="glyphicon glyphicon-sort" ng-show="sortKey=='LastName'" ng-class="{'glyphicon-cheveron-up':reverse,'glyphicon-cheveron-down':!reverse}"></span>-->
+                    </th>
+                    <th ng-click="sort(Age)">
+                        Age
+                        <!--<span class="glyphicon glyphicon-sort" ng-show="sortKey=='Age'" ng-class="{'glyphicon-cheveron-up':reverse,'glyphicon-cheveron-down':!reverse}"></span>-->
+                    </th>
+                    <th ng-click="sort(Active)">
+                        Active
+                        <!--<span class="glyphicon glyphicon-sort" ng-show="sortKey=='Active'" ng-class="{'glyphicon-cheveron-up':reverse,'glyphicon-cheveron-down':!reverse}"></span>-->
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="d in PersonalDetails|filter:search|orderBy:sortKey:reverse|limitTo: itemsPerPage: (currentPage-1) * itemsPerPage">
+                    <td>{{d.FirstName}}</td>
+                    <td>{{d.LastName}}</td>
+                    <td>{{d.Age}}</td>
+                    <td>{{d.Active}}</td>
+                    <th><a href="#/PD/Edit/{{d.AutoId}}">Edit</a> | <a href="#/PD/Details/{{d.AutoId}}">Details</a></th>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="pull-left">
+                    <br />
+                    <pre>Page: {{currentPage}}/{{numPages}}</pre>
+                </div>
+                <div class="pull-right">
+                    <ul uib-pagination total-items="(PersonalDetails|filter:search).length" ng-model="currentPage" max-size="5" items-per-page="itemsPerPage" boundary-links="true" num-pages="numPages"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+            </div>
+        </div>
+    </div>
+</div>
+<!--<ul class="pager">
+    <li class="previous disabled"><span>&larr; Previous</span></li>
+    <li class="next"><a href="#">Next &rarr;</a></li>
+</ul>
+<ul class="pagination pagination-lg" ng-model="pagination.currentPage">
+    <li class="disabled"><span href="#">&laquo;</span></li>
+    <li><a href="#">1</a></li>
+    <li class="active"><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul>-->
+<!--<div uib-pagination total-items="pagination.totalItems" ng-model="pagination.currentPage"
+     max-size="5" boundary-links="true" items-per-page="pagination.numPerPage"
+     class="pagination-sm">
+</div>-->

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ng-value-false</title>
+    <script src="/Scripts/angular.min.js"></script>
+</head>
+<body>    
+    <script>
+        var app = angular.module("app",[]);
+        app.controller("chkValue", function ($scope) {
+            $scope.chkVal1 = false;
+            $scope.chkVal2 = 'Female';
+
+            $scope.GetValue = function () {
+                alert($scope.chkVal1 + ' ' + $scope.chkVal2);
+            }
+        });
+    </script>
+    <div ng-app="app" ng-controller="chkValue">
+        simple:<input type="checkbox" ng-model="chkVal1" />{{chkVal1}}
+        Complex:<input type="checkbox" ng-model="chkVal2" ng-true-value="'Male'" ng-false-value="'Female'" />{{chkVal2}}
+        <input type="button" value="submit" ng-click="GetValue()" />
+    </div>
+</body>
+</html>

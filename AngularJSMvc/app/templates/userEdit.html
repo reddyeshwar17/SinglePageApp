@@ -1,0 +1,42 @@
+﻿<h2>Edit</h2>
+<form class="form-horizontal" name="frmEditUser" ng-submit="updateUser(user)" novalidate>
+    <h4>Edit current user</h4>
+    <hr />
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Name</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="name" ng-model="user.Name" ng-maxlength="30" required />
+            <span class="text-danger" ng-show="(frmEditUser.name.$touched || frmEditUser.name.$dirty) && frmEditUser.name.$invalid">
+                <span ng-show="(frmEditUser.name.$error.required)">Name is required</span>
+                <span ng-show="(frmEditUser.name.$error.maxlength)">Name must be less than or equal to 30</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+            <input type="email" name="email" class="form-control" ng-model="user.Email" required ng-maxlength="50" />
+            <span class="text-danger" ng-show="(frmEditUser.email.$touched || frmEditUser.email.$dirty) && frmEditUser.email.$invalid">
+                <span ng-show="frmEditUser.email.$error.required">Email is required</span>
+                <span ng-show="frmEditUser.email.$error.email">Invalid email address</span>
+                <span ng-show="(frmEditUser.email.$error.maxlength)">Email must be less than or equal to 50</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-2 control-label">Address</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" name="address" ng-model="user.Address" required ng-minlength="2" />
+            <span class="text-danger" ng-show="(frmEditUser.address.$touched || frmEditUser.address.$dirty) && frmEditUser.address.$invalid">
+                <span ng-show="frmEditUser.address.$error.required">Address is required</span>
+                <span ng-show="frmEditUser.address.$error.minlength">Address should be between 2 and 100</span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+            <input type="submit" class="btn btn-success" value="Update" ng-if="showUpdateButton" ng-disabled="frmEditUser.$pristine || frmEditUser.$invalid" />
+            <a href="#/" class="bnt btn-default">Cancel</a>
+        </div>
+    </div>
+</form>
